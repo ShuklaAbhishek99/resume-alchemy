@@ -1,15 +1,13 @@
 import Header from "@/components/App/Custom/Header";
-import { SignIn } from "@clerk/clerk-react";
+import { SignUp } from "@clerk/clerk-react";
 
-function SignInPage() {
+export default function SignUpPage() {
     return (
         <>
             <Header />
             <div className="flex justify-center my-10">
-                <SignIn />
+                <SignUp />
             </div>
         </>
     );
 }
-
-export default SignInPage;

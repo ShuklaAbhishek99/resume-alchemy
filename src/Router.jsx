@@ -3,6 +3,7 @@ import SignInPage from "./auth/sign-in";
 import App from "./App";
 import Home from "./components/App/Home";
 import Dashboard from "./components/App/Dashboard";
+import SignUpPage from "./auth/sign-up";
 
 export const router = createBrowserRouter([
     {
@@ -11,6 +12,10 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard",
                 element: <Dashboard />,
+            },
+            {
+                path: "/:username",
+                element: "Profile page"
             },
         ],
     },
@@ -21,5 +26,9 @@ export const router = createBrowserRouter([
     {
         path: "/auth/sign-in",
         element: <SignInPage />,
+    },
+    {
+        path: "/auth/sign-up",
+        element: <SignUpPage />,
     },
 ]);

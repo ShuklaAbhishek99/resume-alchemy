@@ -1,16 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/clerk-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
     const { isSignedIn } = useUser();
+    const navigate = useNavigate();
 
     return (
-        <div className="flex justify-between py-1 px-5 shadow-md">
+        <div className="flex justify-between py-1 px-5 shadow-md dark:shadow-2xl dark:shadow-emerald-900">
             <img
                 src="/Logo.png"
                 alt="logo"
-                className="w-14 min-w-12 min-h-12 m-1"
+                className="w-14 min-w-12 min-h-12 m-1 cursor-pointer"
+                onClick={() => navigate("/")}
             />
 
             {isSignedIn ? (
