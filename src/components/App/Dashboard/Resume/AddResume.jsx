@@ -7,7 +7,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
-import { PlusCircle } from "lucide-react";
+import { Loader2, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -17,6 +17,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import resumeService from "@/appwrite/db/resume";
+import { useUser } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 const industries = [
     "Agriculture",
@@ -75,7 +80,42 @@ const industries = [
 ];
 
 function AddResume() {
-    const [openDailog, setOpenDialog] = useState(false);
+    const { user, isSignedIn, isLoaded } = useUser();
+    const [openDialog, setOpenDialog] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        setValue,
+        reset,
+    } = useForm();
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+
+    const createResume = async (data) => {
+        setLoading(true);
+        if (isSignedIn && isLoaded) {
+            try {
+                const resumeData = await resumeService.createResume(
+                    user.id,
+                    data.resumeTitle,
+                    data.industry
+                );
+
+                if (resumeData) {
+                    navigate(`/dashboard/resume/${resumeData.$id}/edit`);
+                }
+
+                console.log(resumeData);
+            } catch (error) {
+                toast.error(`Error creating resume ${error}`);
+            } finally {
+                reset();
+                setOpenDialog(false);
+                setLoading(false);
+            }
+        }
+    };
 
     return (
         <div>
@@ -86,41 +126,67 @@ function AddResume() {
                 <PlusCircle />
             </div>
 
-            <Dialog open={openDailog} onOpenChange={setOpenDialog}>
+            <Dialog open={openDialog} onOpenChange={setOpenDialog}>
                 <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Create New Resume?</DialogTitle>
-                        <DialogDescription>
-                            <p className="my-1">Add a title for your resume</p>
-                            <Input
-                                className="my-2"
-                                placeholder="Ex - Full Stack resume"
-                            />
-                        </DialogDescription>
-                        <DialogDescription>
-                            <p className="my-1">Choose your work field</p>
-                            <Select>
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Theme" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {industries.map((industry) => (
-                                        <SelectItem
-                                            key={industry}
-                                            value={industry}
-                                        >
-                                            {industry}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </DialogDescription>
-                    </DialogHeader>
-                    <DialogFooter>
-                        <div className="flex justify-end gap-5">
-                            <Button type="submit">Create</Button>
-                        </div>
-                    </DialogFooter>
+                    <form onSubmit={handleSubmit(createResume)}>
+                        <DialogHeader>
+                            <DialogTitle>Create New Resume?</DialogTitle>
+                            <DialogDescription></DialogDescription>
+                            <div>
+                                <p className="my-1 text-sm text-gray-500">
+                                    Add a title for your resume
+                                </p>
+                                <Input
+                                    className="my-2"
+                                    placeholder="Ex - Full Stack Resume"
+                                    {...register("resumeTitle", {
+                                        required: "Please enter resume title",
+                                    })}
+                                />
+                                {errors.resumeTitle?.message && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.resumeTitle.message}
+                                    </p>
+                                )}
+                                <p className="my-1 text-sm text-gray-500">
+                                    Choose your work field
+                                </p>
+                                <Select
+                                    required
+                                    onValueChange={(value) =>
+                                        setValue("industry", value, {
+                                            shouldValidate: true,
+                                        })
+                                    }
+                                >
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue placeholder="Field" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {industries.map((industry) => (
+                                            <SelectItem
+                                                key={industry}
+                                                value={industry}
+                                            >
+                                                {industry}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                        </DialogHeader>
+                        <DialogFooter>
+                            <div className="flex justify-end gap-5">
+                                <Button type="submit">
+                                    {loading ? (
+                                        <Loader2 className="animate-spin" />
+                                    ) : (
+                                        "Create"
+                                    )}
+                                </Button>
+                            </div>
+                        </DialogFooter>
+                    </form>
                 </DialogContent>
             </Dialog>
         </div>

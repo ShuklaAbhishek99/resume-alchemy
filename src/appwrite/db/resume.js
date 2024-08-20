@@ -30,6 +30,18 @@ class ResumeService {
         }
     }
 
+    async getResume(docId) {
+        try {
+            return await this.databases.getDocument(
+                appwriteConfigs.appwriteDatabaseId,
+                appwriteConfigs.appwriteResumesCollectionId,
+                docId
+            );
+        } catch (error) {
+            console.log("Appwrite Service :: getResume :: error ", error);
+        }
+    }
+
     async getResumes(queries) {
         try {
             return await this.databases.listDocuments(
@@ -38,7 +50,7 @@ class ResumeService {
                 queries
             );
         } catch (error) {
-            console.log("Appwrite Service :: createResume :: error ", error);
+            console.log("Appwrite Service :: getResumes :: error ", error);
         }
     }
 
@@ -53,7 +65,7 @@ class ResumeService {
                 }
             );
         } catch (error) {
-            console.log("Appwrite Service :: createResume :: error ", error);
+            console.log("Appwrite Service :: updateResume :: error ", error);
         }
     }
 
@@ -65,7 +77,7 @@ class ResumeService {
                 docId
             );
         } catch (error) {
-            console.log("Appwrite Service :: createResume :: error ", error);
+            console.log("Appwrite Service :: deleteResume :: error ", error);
         }
     }
 }

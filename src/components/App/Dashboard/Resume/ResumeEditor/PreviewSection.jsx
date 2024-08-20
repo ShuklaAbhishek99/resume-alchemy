@@ -3,29 +3,33 @@ import SummaryPreview from "../Previews/Summary";
 import ExperiencePreview from "../Previews/Experience";
 import EducationalPreview from "../Previews/Education";
 import SkillsPreview from "../Previews/Skills";
+import { useSelector } from "react-redux";
 
 function PreviewSection() {
+    const resumeData = useSelector((state) => state.resume);
+
     return (
         <div
             className="shadow-lg h-full p-14 border-t-[20px] bg-white text-black"
             style={{
-                borderColor: "red",
+                borderColor: resumeData?.themeColor,
             }}
         >
-            {/* Personal Detail  */}
-            <PersonalDetailPreview resumeInfo={""} />
-            {/* Summery  */}
-            <SummaryPreview resumeInfo={""} />
-            {/* Professional Experience  */}
-            {"dd"?.Experience?.length > 0 && (
-                <ExperiencePreview resumeInfo={""} />
+            <PersonalDetailPreview resumeInfo={resumeData} />
+
+            <SummaryPreview resumeInfo={resumeData} />
+
+            {resumeData?.Experience?.length > 0 && (
+                <ExperiencePreview resumeInfo={resumeData} />
             )}
-            {/* Educational  */}
-            {"d"?.education?.length > 0 && (
-                <EducationalPreview resumeInfo={""} />
+
+            {resumeData?.education?.length > 0 && (
+                <EducationalPreview resumeInfo={resumeData} />
             )}
-            {/* Skills  */}
-            {"dd"?.skills?.length > 0 && <SkillsPreview resumeInfo={""} />}
+
+            {resumeData?.skills?.length > 0 && (
+                <SkillsPreview resumeInfo={resumeData} />
+            )}
         </div>
     );
 }

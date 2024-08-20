@@ -3,11 +3,39 @@ import Summary from "../Forms/Summary";
 import Education from "../Forms/Education";
 import Experience from "../Forms/Experience";
 import Skills from "../Forms/Skills";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Home } from "lucide-react";
+import { useState, useEffect } from "react";
+import resumeService from "@/appwrite/db/resume";
+import { useDispatch } from "react-redux";
+import { addResume } from "@/features/resumeSlice";
 
 function FormSection() {
+    const { resumeId } = useParams();
+    const [step, setStep] = useState(1);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        fetchResumeData();
+    }, []);
+
+    const fetchResumeData = async () => {
+        const resumeData = await resumeService.getResume(resumeId);
+
+        if (resumeData) {
+            dispatch(addResume(resumeData));
+        }
+    };
+
+    const handleNext = () => {
+        setStep(step + 1);
+    };
+
+    const handleBack = () => {
+        setStep(step - 1);
+    };
+
     return (
         <div className="">
             <div className="flex justify-between items-center">
@@ -20,28 +48,30 @@ function FormSection() {
                     {/* <ThemeColor /> */}
                 </div>
                 <div className="flex gap-2">
-                    {2 > 1 && (
-                        <Button size="sm" onClick={() => ""}>
-                            {" "}
-                            <ArrowLeft />{" "}
-                        </Button>
-                    )}
                     <Button
-                        disabled={""}
+                        disabled={step === 1}
+                        size="sm"
+                        onClick={handleBack}
+                    >
+                        <ArrowLeft />
+                    </Button>
+
+                    <Button
+                        disabled={step === 5}
                         className="flex gap-2"
                         size="sm"
-                        onClick={() => ""}
+                        onClick={handleNext}
                     >
                         Next
                         <ArrowRight />
                     </Button>
                 </div>
             </div>
-            <PersonalDetails />
-            {/* <Summary /> */}
-            {/* <Experience /> */}
-            {/* <Education /> */}
-            {/* <Skills /> */}
+            {step === 1 && <PersonalDetails />}
+            {step === 2 && <Summary />}
+            {step === 3 && <Experience />}
+            {step === 4 && <Education />}
+            {step === 5 && <Skills />}
         </div>
     );
 }
