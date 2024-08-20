@@ -13,10 +13,10 @@ function App() {
     }
 
     return (
-        <>
+        <div className="h-screen">
             <Header />
             <Outlet />
-        </>
+        </div>
     );
 }
 
