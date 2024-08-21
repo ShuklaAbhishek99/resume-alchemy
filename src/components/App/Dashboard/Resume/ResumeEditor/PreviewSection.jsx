@@ -15,21 +15,15 @@ function PreviewSection() {
                 borderColor: resumeData?.themeColor,
             }}
         >
-            <PersonalDetailPreview resumeInfo={resumeData} />
+            <PersonalDetailPreview />
 
-            <SummaryPreview resumeInfo={resumeData} />
+            <SummaryPreview />
 
-            {resumeData?.Experience?.length > 0 && (
-                <ExperiencePreview resumeInfo={resumeData} />
-            )}
+            {resumeData?.experience?.length > 0 && <ExperiencePreview />}
 
-            {resumeData?.education?.length > 0 && (
-                <EducationalPreview resumeInfo={resumeData} />
-            )}
+            {resumeData?.education?.length > 0 && <EducationalPreview />}
 
-            {resumeData?.skills?.length > 0 && (
-                <SkillsPreview resumeInfo={resumeData} />
-            )}
+            {resumeData?.skills?.length > 0 && <SkillsPreview />}
         </div>
     );
 }

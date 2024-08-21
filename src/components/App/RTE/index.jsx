@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Brain, LoaderCircle } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     BtnBold,
     BtnBulletList,
@@ -15,34 +13,21 @@ import {
     Toolbar,
 } from "react-simple-wysiwyg";
 
-function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
-    const [loading, setLoading] = useState(false);
+function RichTextEditor({ onRichTextEditorChange, defaultValue }) {
+    const [value, setValue] = useState(defaultValue);
+
+    useEffect(() => {
+        setValue(defaultValue);
+    }, [defaultValue]);
 
     return (
         <div>
-            <div className="flex justify-between my-2">
-                <label className="text-xs">Summery</label>
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={""}
-                    disabled={loading}
-                    className="flex gap-2 border-primary text-primary"
-                >
-                    {loading ? (
-                        <LoaderCircle className="animate-spin" />
-                    ) : (
-                        <>
-                            <Brain className="h-4 w-4" /> Generate from AI
-                        </>
-                    )}
-                </Button>
-            </div>
             <EditorProvider>
                 <Editor
-                    value={""}
+                    value={value}
                     onChange={(e) => {
-                        "";
+                        setValue(e.target.value);
+                        onRichTextEditorChange(e);
                     }}
                 >
                     <Toolbar>

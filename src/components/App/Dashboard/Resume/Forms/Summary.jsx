@@ -170,12 +170,13 @@ function Summary() {
 
             {summaries.length !== 0 && (
                 <div className="my-5">
-                    <h2 className="font-bold text-lg">Suggestions</h2>
+                    <h2 className="font-bold text-lg mx-3">Suggestions</h2>
                     {summaries?.map((item, index) => (
                         <div
                             key={index}
                             onClick={() => handleAISummaryClick(item.summary)}
-                            className="p-5 shadow-lg my-4 rounded-lg cursor-pointer"
+                            className="p-5 shadow-lg my-4 rounded-lg cursor-pointer opacity-0 obo-fade-in"
+                            style={{ "--i": index + 1 }}
                         >
                             <h2 className="font-bold my-1 text-primary">
                                 {item.experience_level}
