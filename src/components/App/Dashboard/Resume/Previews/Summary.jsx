@@ -1,11 +1,9 @@
-import React from 'react'
+import { useSelector } from "react-redux";
 
-function SummeryPreview({resumeInfo}) {
-  return (
-    <p className='text-xs'>
-        {resumeInfo?.summery}
-    </p>
-  )
+function SummeryPreview() {
+    const resumeData = useSelector((state) => state.resume);
+
+    return <p className="text-xs">{resumeData?.summary}</p>;
 }
 
-export default SummeryPreview
+export default SummeryPreview;

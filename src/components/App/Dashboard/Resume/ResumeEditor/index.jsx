@@ -11,16 +11,16 @@ function ResumeEditor() {
         <div className="h-full">
             <ResizablePanelGroup
                 direction="horizontal"
-                className="w-full rounded-lg"
+                className="w-full h-full rounded-lg"
             >
                 <ResizablePanel defaultSize={50}>
-                    <div>
+                    <div className="h-full overflow-y-auto">
                         <FormSection />
                     </div>
                 </ResizablePanel>
                 <ResizableHandle withHandle />
                 <ResizablePanel defaultSize={50}>
-                    <div>
+                    <div className="h-full overflow-y-auto">
                         <PreviewSection />
                     </div>
                 </ResizablePanel>
