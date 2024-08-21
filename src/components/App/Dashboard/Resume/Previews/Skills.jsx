@@ -1,35 +1,59 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-function SkillsPreview({resumeInfo}) {
-  return (
-    <div className='my-6'>
-    <h2 className='text-center font-bold text-sm mb-2'
-    style={{
-        color:resumeInfo?.themeColor
-    }}
-    >Education</h2>
-    <hr style={{
-        borderColor:resumeInfo?.themeColor
-    }} />
+function SkillsPreview() {
+    const resumeData = useSelector((state) => state.resume);
+    const [skillsList, setSkillsList] = useState([]);
 
-    <div className='grid grid-cols-2 gap-3 my-4'>
-        {resumeInfo?.skills.map((skill,index)=>(
-            <div key={index} className='flex items-center justify-between'>
-                <h2 className='text-xs'>{skill.name}</h2>
-                <div className='h-2 bg-gray-200 w-[120px]'>
-                    <div className='h-2'
-                        style={{
-                            backgroundColor:resumeInfo?.themeColor,
-                            width:skill?.rating*20+'%'
-                        }}
-                    >
-                    </div>
-                </div>
+    useEffect(() => {
+        if (resumeData.skills) {
+            const skillData = JSON.parse(resumeData.skills);
+            setSkillsList(skillData || []);
+
+            console.log(skillData);
+        }
+    }, [resumeData?.skills]);
+
+    return (
+        <div className="my-6">
+            <h2
+                className="text-center font-bold text-sm mb-2"
+                style={{
+                    color: skillsList?.themeColor,
+                }}
+            >
+                Skills
+            </h2>
+            <hr
+                style={{
+                    borderColor: skillsList?.themeColor,
+                }}
+            />
+
+            <div className="grid grid-cols-2 gap-3 my-4">
+                {skillsList?.map((skill) => {
+                    console.log(skill?.rating);
+                    return (
+                        <div
+                            key={skill?.id}
+                            className="flex items-center justify-between"
+                        >
+                            <h2 className="text-xs">{skill?.name}</h2>
+                            <div className="h-2 bg-gray-200 w-[120px]">
+                                <div
+                                    className="h-2"
+                                    style={{
+                                        backgroundColor: resumeData?.themeColor,
+                                        width: skill?.rating * 20 + "%",
+                                    }}
+                                ></div>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
-        ))}
-    </div>
-    </div>
-  )
+        </div>
+    );
 }
 
-export default SkillsPreview
+export default SkillsPreview;

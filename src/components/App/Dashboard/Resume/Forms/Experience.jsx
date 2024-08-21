@@ -317,7 +317,10 @@ function Experience() {
                             + Add More Experience
                         </Button>
                     </div>
-                    <Button type="submit" disabled={loading}>
+                    <Button
+                        type="submit"
+                        disabled={loading || experienceList.length === 0}
+                    >
                         {loading ? (
                             <LoaderCircle className="animate-spin" />
                         ) : (

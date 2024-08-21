@@ -28,13 +28,9 @@ function Education() {
     const handleInputChange = debounce((e, id) => {
         const { name, value } = e.target;
 
-        console.log(name, value);
-
         const updatedEduList = educationList.map((item) =>
             item.id === id ? { ...item, [name]: value } : item
         );
-
-        console.log(updatedEduList);
 
         setEducationList(updatedEduList);
 
@@ -225,7 +221,10 @@ function Education() {
                             + Add More Education
                         </Button>
                     </div>
-                    <Button type="submit" disabled={loading}>
+                    <Button
+                        type="submit"
+                        disabled={loading || educationList.length === 0}
+                    >
                         {loading ? (
                             <LoaderCircle className="animate-spin" />
                         ) : (
