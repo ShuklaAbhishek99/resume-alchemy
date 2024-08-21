@@ -17,14 +17,13 @@ function Experience() {
     const { isSignedIn, isLoaded } = useUser();
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
-    const [summaries, setSummaries] = useState([]);
     const [loadSummaries, setLoadSummaries] = useState(false);
 
     useEffect(() => {
-        if (resumeData.experience) {
+        if (resumeData?.experience) {
             const expData = JSON.parse(resumeData?.experience);
 
-            setExperienceList(expData || "");
+            setExperienceList(expData || []);
         }
     }, [resumeData?.experience]);
 
@@ -75,7 +74,6 @@ function Experience() {
                 state: "",
                 startDate: "",
                 endDate: "",
-                currentlyWorking: "",
                 workSummary: "",
             },
         ];
@@ -152,7 +150,6 @@ function Experience() {
     }
 
     async function fetchAIResponse(postionTitle, id) {
-        setSummaries([]);
         setLoadSummaries(true);
 
         try {

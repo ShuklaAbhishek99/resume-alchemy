@@ -8,7 +8,7 @@ function ExperiencePreview() {
     useEffect(() => {
         if (resumeData?.experience) {
             const expData = JSON.parse(resumeData.experience);
-            setExperienceList(expData || "");
+            setExperienceList(expData || []);
         }
     }, [resumeData?.experience]);
 
