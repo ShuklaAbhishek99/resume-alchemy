@@ -4,7 +4,7 @@ import "./index.css";
 import { router } from "./Router.jsx";
 import { RouterProvider } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
-import { dark } from "@clerk/themes";
+import { dark, neobrutalism, shadesOfPurple } from "@clerk/themes";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 
@@ -25,7 +25,7 @@ createRoot(document.getElementById("root")).render(
                 signInUrl="/auth/sign-in"
                 signUpUrl="/auth/sign-up"
                 appearance={{
-                    baseTheme: dark,
+                    baseTheme: neobrutalism,
                 }}
             >
                 <RouterProvider router={router} />

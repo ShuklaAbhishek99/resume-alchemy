@@ -1,10 +1,47 @@
 import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/clerk-react";
+import { MoonStar, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
     const { isSignedIn } = useUser();
     const navigate = useNavigate();
+    const [currentTheme, setCurrentTheme] = useState(
+        localStorage.getItem("theme") || "light"
+    );
+
+    useEffect(() => {
+        const html = document.querySelector("html");
+
+        html.classList.remove("light", "dark");
+
+        if (currentTheme) {
+            html.classList.add(currentTheme);
+            localStorage.setItem("theme", currentTheme);
+        } else {
+            const defaultTheme = "light";
+            html.classList.add(defaultTheme);
+            setCurrentTheme(defaultTheme);
+            localStorage("theme", defaultTheme);
+        }
+    }, [currentTheme]);
+
+    const changeTheme = () => {
+        if (currentTheme === "light") {
+            const html = document.querySelector("html");
+            html.classList.remove("light", "dark");
+            html.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+            setCurrentTheme("dark");
+        } else {
+            const html = document.querySelector("html");
+            html.classList.remove("light", "dark");
+            html.classList.add("light");
+            localStorage.setItem("theme", "light");
+            setCurrentTheme("light");
+        }
+    };
 
     return (
         <>
@@ -18,20 +55,25 @@ function Header() {
                     />
                 </div>
 
-                {isSignedIn ? (
-                    <div className="flex gap-3 my-auto">
-                        <Link to="/dashboard">
-                            <Button>Dashboard</Button>
-                        </Link>
-                        <UserButton />
-                    </div>
-                ) : (
-                    <div className="my-auto">
-                        <Link to="/auth/sign-in">
-                            <Button>Get started</Button>
-                        </Link>
-                    </div>
-                )}
+                <div className="flex gap-3">
+                    <Button className="my-auto" onClick={changeTheme}>
+                        {currentTheme === "light" ? <Sun /> : <MoonStar />}
+                    </Button>
+                    {isSignedIn ? (
+                        <div className="flex gap-3 my-auto">
+                            <Link to="/dashboard">
+                                <Button>Dashboard</Button>
+                            </Link>
+                            <UserButton />
+                        </div>
+                    ) : (
+                        <div className="my-auto">
+                            <Link to="/auth/sign-in">
+                                <Button>Get started</Button>
+                            </Link>
+                        </div>
+                    )}
+                </div>
             </div>
 
             {/* future updates */}

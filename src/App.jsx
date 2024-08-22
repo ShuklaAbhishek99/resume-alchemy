@@ -4,9 +4,7 @@ import Header from "./components/App/Custom/Header";
 import { Toaster } from "sonner";
 
 function App() {
-    const { user, isLoaded, isSignedIn } = useUser();
-
-    console.log(user);
+    const { isLoaded, isSignedIn } = useUser();
 
     if (!isSignedIn && isLoaded) {
         return <Navigate to="/auth/sign-in" />;
