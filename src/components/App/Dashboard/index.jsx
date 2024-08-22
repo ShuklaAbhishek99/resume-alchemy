@@ -34,10 +34,12 @@ function Dashboard() {
 
     return (
         <div className="p-10 md:px-20 lg:px-32">
-            <h2 className="font-bold text-2xl">My Resume</h2>
-            <p>Start Creating AI resume for your next job role</p>
+            <h2 className="font-bold text-2xl my-2">My Resume</h2>
+            <p className="my-3">
+                Start Creating AI resume for your next job role
+            </p>
             <div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6 gap-4 mt-6">
                     <AddResume />
                     {loading ? (
                         <div className="flex flex-col space-y-3">
@@ -48,7 +50,10 @@ function Dashboard() {
                         </div>
                     ) : (
                         resumeListData?.map((resume) => (
-                            <div key={resume.$id}>
+                            <div
+                                key={resume.$id}
+                                className="hover:scale-105 hover:shadow-md transition-all"
+                            >
                                 <ResumeCard
                                     resumeId={resume.$id}
                                     resumeTitle={resume.resumeTitle}

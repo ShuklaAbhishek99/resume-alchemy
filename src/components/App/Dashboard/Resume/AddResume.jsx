@@ -120,7 +120,7 @@ function AddResume() {
     return (
         <div>
             <div
-                className="p-14 py-24 border-4 border-dashed bg-secondary flex justify-center items-center rounded-lg mt-10 h-[280px] hover:scale-105 hover:shadow-md transition-all cursor-pointer"
+                className="p-14 py-24 border-4 border-dashed dark:border-gray-700 bg-secondary flex justify-center items-center rounded-lg my-5 h-[280px] hover:scale-105 hover:shadow-md transition-all cursor-pointer"
                 onClick={() => setOpenDialog(true)}
             >
                 <PlusCircle />
