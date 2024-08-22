@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/clerk-react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
     const { isSignedIn } = useUser();
@@ -34,7 +34,8 @@ function Header() {
                 )}
             </div>
 
-            {isSignedIn && (
+            {/* future updates */}
+            {/* {isSignedIn && (
                 <div className="text-blue-gray-900 bg-white dark:bg-black shadow-md dark:shadow-2xl">
                     <ul className="flex mx-3">
                         <li className="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
@@ -67,7 +68,7 @@ function Header() {
                         </li>
                     </ul>
                 </div>
-            )}
+            )} */}
         </>
     );
 }

@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import resumeService from "@/appwrite/db/resume";
 import { useDispatch } from "react-redux";
 import { addResume } from "@/features/resumeSlice";
+import ThemeColor from "@/components/App/ThemeBtn";
 
 function FormSection() {
     const { resumeId } = useParams();
@@ -46,7 +47,9 @@ function FormSection() {
                             <Home />
                         </Button>
                     </Link>
-                    {/* <ThemeColor /> */}
+                    <div className="my-auto">
+                        <ThemeColor />
+                    </div>
                 </div>
                 <div className="flex gap-2">
                     <Button
