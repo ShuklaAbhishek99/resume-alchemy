@@ -63,6 +63,7 @@ function ResumeCard({ resumeId, resumeTitle, themeColor }) {
                 className="hover:scale-105 hover:shadow-md transition-all"
             >
                 <div
+                    title="View Resume"
                     className="p-14 bg-gradient-to-b from-pink-100 via-purple-200 to-blue-200 h-[280px] rounded-t-lg border-t-4"
                     style={{
                         borderColor: themeColor,
@@ -73,6 +74,7 @@ function ResumeCard({ resumeId, resumeTitle, themeColor }) {
                     </div>
                 </div>
                 <div
+                    title="Options"
                     className="border p-3 flex justify-between  text-white rounded-b-lg shadow-lg"
                     style={{
                         background: themeColor,

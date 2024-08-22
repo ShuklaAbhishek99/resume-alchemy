@@ -42,17 +42,18 @@ function FormSection() {
         <div className="">
             <div className="flex justify-between items-center">
                 <div className="flex gap-5">
-                    <Link to={"/dashboard"}>
+                    <Link title="Dashboard" to={"/dashboard"}>
                         <Button>
                             <Home />
                         </Button>
                     </Link>
-                    <div className="my-auto">
+                    <div title="Theme" className="my-auto">
                         <ThemeColor />
                     </div>
                 </div>
                 <div className="flex gap-2">
                     <Button
+                        title="Back"
                         disabled={step === 1}
                         size="sm"
                         onClick={handleBack}
@@ -61,6 +62,7 @@ function FormSection() {
                     </Button>
                     {step >= 5 ? (
                         <Button
+                            title="Submit"
                             className="flex gap-2"
                             size="sm"
                             onClick={() => navigate(`/resume/${resumeId}`)}
@@ -70,6 +72,7 @@ function FormSection() {
                         </Button>
                     ) : (
                         <Button
+                            title="Next"
                             disabled={step === 5}
                             className="flex gap-2"
                             size="sm"

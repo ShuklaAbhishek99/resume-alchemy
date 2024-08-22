@@ -50,25 +50,30 @@ function Header() {
                     <img
                         src="/Logo.png"
                         alt="logo"
+                        title="Resume Alchemy"
                         className="w-14 min-w-12 min-h-12 m-1 cursor-pointer"
                         onClick={() => navigate("/")}
                     />
                 </div>
 
                 <div className="flex gap-3">
-                    <Button className="my-auto" onClick={changeTheme}>
+                    <Button
+                        className="my-auto"
+                        title="Theme"
+                        onClick={changeTheme}
+                    >
                         {currentTheme === "light" ? <Sun /> : <MoonStar />}
                     </Button>
                     {isSignedIn ? (
                         <div className="flex gap-3 my-auto">
-                            <Link to="/dashboard">
+                            <Link title="Dashboard" to="/dashboard">
                                 <Button>Dashboard</Button>
                             </Link>
                             <UserButton />
                         </div>
                     ) : (
                         <div className="my-auto">
-                            <Link to="/auth/sign-in">
+                            <Link title="SignIn or Create Account" to="/auth/sign-in">
                                 <Button>Get started</Button>
                             </Link>
                         </div>

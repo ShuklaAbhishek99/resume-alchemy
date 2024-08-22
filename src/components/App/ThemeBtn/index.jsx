@@ -85,7 +85,7 @@ function ThemeColor() {
         <Popover>
             <PopoverTrigger asChild>
                 <Button variant="outline" size="sm" className="flex gap-2">
-                    <LayoutGrid /> Theme
+                    <LayoutGrid />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="mx-4">
