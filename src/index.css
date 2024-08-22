@@ -31,6 +31,43 @@ menu {
     padding-left: 2em;
 }
 
+@media print {
+    #no-print {
+        display: none;
+    }
+
+    #print-area {
+        display: block;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .shadow-lg {
+        box-shadow: none !important;
+    }
+
+    .p-14,
+    .mx-10,
+    .my-10,
+    .md\:mx-20,
+    .lg\:mx-36 {
+        padding: 10px 20px !important;
+        margin: 0 !important;
+    }
+
+    @page {
+        size: auto;
+        margin: 0 !important;
+    }
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;

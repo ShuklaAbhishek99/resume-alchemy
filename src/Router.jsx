@@ -5,6 +5,7 @@ import Home from "./components/App/Home";
 import Dashboard from "./components/App/Dashboard";
 import SignUpPage from "./components/App/Auth/SignUp";
 import ResumeEditor from "./components/App/Dashboard/Resume/ResumeEditor";
+import ResumeView from "./components/App/ResumeViewer";
 
 export const router = createBrowserRouter([
     {
@@ -39,5 +40,9 @@ export const router = createBrowserRouter([
     {
         path: "/auth/sign-up",
         element: <SignUpPage />,
+    },
+    {
+        path: "/resume/:resumeId",
+        element: <ResumeView />,
     },
 ]);

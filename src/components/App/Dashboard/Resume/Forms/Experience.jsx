@@ -47,8 +47,6 @@ function Experience() {
     const handleRichTextEditor = (e, name, id) => {
         const { value } = e.target;
 
-        console.log(name, value);
-
         const updatedExpList = experienceList.map((item) =>
             item.id === id ? { ...item, [name]: value } : item
         );
@@ -157,7 +155,6 @@ function Experience() {
                 `Please provide a list of 4-5 bullet points for the position title ${postionTitle} which explain about the role that I have worked in ex- my contribution in the company, project, etc. Format the response as an array of strings. Remember to include only bullet points which is a string nothing else as i have to process the string. Dont't mention things like here are your points, this is your points, etc.`
             );
             const responseString = data.data;
-            console.log(responseString);
 
             const e = {
                 target: { value: responseString },

@@ -59,7 +59,7 @@ function Summary() {
             const originalData = JSON.parse(arrayString);
             setSummaries(originalData);
         } catch (error) {
-            console.log("Rrror in fetchAIResponse :: ", error);
+            console.log("Error in fetchAIResponse :: ", error);
         } finally {
             setLoadSummaries(false);
         }

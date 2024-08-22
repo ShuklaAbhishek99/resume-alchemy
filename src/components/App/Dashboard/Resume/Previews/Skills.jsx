@@ -9,8 +9,6 @@ function SkillsPreview() {
         if (resumeData.skills) {
             const skillData = JSON.parse(resumeData.skills);
             setSkillsList(skillData || []);
-
-            console.log(skillData);
         }
     }, [resumeData?.skills]);
 
@@ -31,26 +29,23 @@ function SkillsPreview() {
             />
 
             <div className="grid grid-cols-2 gap-3 my-4">
-                {skillsList?.map((skill) => {
-                    console.log(skill?.rating);
-                    return (
-                        <div
-                            key={skill?.id}
-                            className="flex items-center justify-between"
-                        >
-                            <h2 className="text-xs">{skill?.name}</h2>
-                            <div className="h-2 bg-gray-200 w-[120px]">
-                                <div
-                                    className="h-2"
-                                    style={{
-                                        backgroundColor: resumeData?.themeColor,
-                                        width: skill?.rating * 20 + "%",
-                                    }}
-                                ></div>
-                            </div>
+                {skillsList?.map((skill) => (
+                    <div
+                        key={skill?.id}
+                        className="flex items-center justify-between"
+                    >
+                        <h2 className="text-xs">{skill?.name}</h2>
+                        <div className="h-2 bg-gray-200 w-[120px]">
+                            <div
+                                className="h-2"
+                                style={{
+                                    backgroundColor: resumeData?.themeColor,
+                                    width: skill?.rating * 20 + "%",
+                                }}
+                            ></div>
                         </div>
-                    );
-                })}
+                    </div>
+                ))}
             </div>
         </div>
     );

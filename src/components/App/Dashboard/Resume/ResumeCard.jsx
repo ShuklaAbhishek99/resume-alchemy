@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -16,19 +14,19 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 import { Loader2Icon, MoreVertical } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function ResumeCard() {
+function ResumeCard({ resumeId, resumeTitle }) {
     const [openAlert, setOpenAlert] = useState(false);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <Link
-            to={"/dashboard/resume/1234/edit"}
+            to={`/dashboard/resume/${resumeId}/edit`}
             className="hover:scale-105 hover:shadow-md transition-all"
         >
             <div
@@ -38,7 +36,6 @@ function ResumeCard() {
                 }}
             >
                 <div className="flex items-center justify-center h-[180px]">
-                    {/* <Notebook/> */}
                     <img src="/cv.png" width={80} height={80} />
                 </div>
             </div>
@@ -48,41 +45,46 @@ function ResumeCard() {
                     background: "red",
                 }}
             >
+                <h2 className="text-sm">{resumeTitle}</h2>
                 <DropdownMenu>
                     <DropdownMenuTrigger>
                         <MoreVertical className="h-4 w-4 cursor-pointer" />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuItem
-                            onClick={() =>
-                                navigation(
-                                    "/dashboard/resume/" +
-                                        resume.documentId +
-                                        "/edit"
-                                )
-                            }
+                            className="cursor-pointer"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigate(`/dashboard/resume/${resumeId}/edit`);
+                            }}
                         >
                             Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                            onClick={() =>
-                                navigation(
-                                    "/my-resume/" + resume.documentId + "/view"
-                                )
-                            }
+                            className="cursor-pointer"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigate(`/resume/${resumeId}`);
+                            }}
                         >
                             View
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                            onClick={() =>
-                                navigation(
-                                    "/my-resume/" + resume.documentId + "/view"
-                                )
-                            }
+                            className="cursor-pointer"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigate(`/dashboard/${resumeId}/view`);
+                            }}
                         >
                             Download
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setOpenAlert(true)}>
+                        <DropdownMenuItem
+                            className="cursor-pointer"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setOpenAlert(true);
+                            }}
+                        >
                             Delete
                         </DropdownMenuItem>
                     </DropdownMenuContent>

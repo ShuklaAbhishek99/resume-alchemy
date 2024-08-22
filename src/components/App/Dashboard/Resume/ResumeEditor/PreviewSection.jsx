@@ -10,7 +10,7 @@ function PreviewSection() {
 
     return (
         <div
-            className="shadow-lg h-full p-14 border-t-[20px] bg-white text-black"
+            className="shadow-lg h-full p-14 bg-white text-black"
             style={{
                 borderColor: resumeData?.themeColor,
             }}

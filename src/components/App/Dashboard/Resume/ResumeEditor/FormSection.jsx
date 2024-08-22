@@ -3,9 +3,9 @@ import Summary from "../Forms/Summary";
 import Education from "../Forms/Education";
 import Experience from "../Forms/Experience";
 import Skills from "../Forms/Skills";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Home } from "lucide-react";
+import { ArrowLeft, ArrowRight, FileCheck2, Home } from "lucide-react";
 import { useState, useEffect } from "react";
 import resumeService from "@/appwrite/db/resume";
 import { useDispatch } from "react-redux";
@@ -15,6 +15,7 @@ function FormSection() {
     const { resumeId } = useParams();
     const [step, setStep] = useState(1);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchResumeData();
@@ -55,16 +56,26 @@ function FormSection() {
                     >
                         <ArrowLeft />
                     </Button>
-
-                    <Button
-                        disabled={step === 5}
-                        className="flex gap-2"
-                        size="sm"
-                        onClick={handleNext}
-                    >
-                        Next
-                        <ArrowRight />
-                    </Button>
+                    {step >= 5 ? (
+                        <Button
+                            className="flex gap-2"
+                            size="sm"
+                            onClick={() => navigate(`/resume/${resumeId}`)}
+                        >
+                            <FileCheck2 />
+                            Finish
+                        </Button>
+                    ) : (
+                        <Button
+                            disabled={step === 5}
+                            className="flex gap-2"
+                            size="sm"
+                            onClick={handleNext}
+                        >
+                            Next
+                            <ArrowRight />
+                        </Button>
+                    )}
                 </div>
             </div>
             {step === 1 && <PersonalDetails />}
