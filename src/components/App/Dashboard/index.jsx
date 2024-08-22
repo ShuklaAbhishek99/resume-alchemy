@@ -52,6 +52,7 @@ function Dashboard() {
                                 <ResumeCard
                                     resumeId={resume.$id}
                                     resumeTitle={resume.resumeTitle}
+                                    themeColor={resume.themeColor}
                                 />
                             </div>
                         ))
