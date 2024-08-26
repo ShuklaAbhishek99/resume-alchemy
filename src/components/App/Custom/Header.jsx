@@ -46,7 +46,7 @@ function Header() {
     return (
         <>
             <div className="flex justify-between py-1 px-5 shadow-md dark:shadow-2xl dark:shadow-emerald-900">
-                <div>
+                <div className="flex">
                     <img
                         src="/Logo.png"
                         alt="logo"
@@ -54,6 +54,7 @@ function Header() {
                         className="w-14 min-w-12 min-h-12 m-1 cursor-pointer"
                         onClick={() => navigate("/")}
                     />
+                    <div className="my-auto text-2xl qwitcher-grypen-bold hidden sm:block">Resume Alchemy</div>
                 </div>
 
                 <div className="flex gap-3">
