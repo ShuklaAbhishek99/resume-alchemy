@@ -102,9 +102,9 @@ function PersonalDetails() {
                             onChange={handleInputChange}
                         />
 
-                        {errors.firstName?.message && (
+                        {errors?.firstName?.message && (
                             <small className="text-red-500 block">
-                                {errors.firstName?.message}
+                                {errors?.firstName?.message}
                             </small>
                         )}
                     </div>
@@ -128,9 +128,9 @@ function PersonalDetails() {
                             onChange={handleInputChange}
                         />
 
-                        {errors.jobTitle?.message && (
+                        {errors?.jobTitle?.message && (
                             <small className="text-red-500 block">
-                                {errors.jobTitle?.message}
+                                {errors?.jobTitle?.message}
                             </small>
                         )}
                     </div>
@@ -169,9 +169,9 @@ function PersonalDetails() {
                             onChange={handleInputChange}
                         />
 
-                        {errors.email?.message && (
+                        {errors?.email?.message && (
                             <small className="text-red-500 block">
-                                {errors.email?.message}
+                                {errors?.email?.message}
                             </small>
                         )}
                     </div>

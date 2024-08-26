@@ -97,16 +97,14 @@ function AddResume() {
         if (isSignedIn && isLoaded) {
             try {
                 const resumeData = await resumeService.createResume(
-                    user.id,
-                    data.resumeTitle,
-                    data.industry
+                    user?.id || null,
+                    data?.resumeTitle || null,
+                    data?.industry || null
                 );
 
                 if (resumeData) {
-                    navigate(`/dashboard/resume/${resumeData.$id}/edit`);
+                    navigate(`/dashboard/resume/${resumeData?.$id}/edit`);
                 }
-
-                console.log(resumeData);
             } catch (error) {
                 toast.error(`Error creating resume ${error}`);
             } finally {
@@ -144,9 +142,9 @@ function AddResume() {
                                         required: "Please enter resume title",
                                     })}
                                 />
-                                {errors.resumeTitle?.message && (
+                                {errors?.resumeTitle?.message && (
                                     <p className="text-red-500 text-sm">
-                                        {errors.resumeTitle.message}
+                                        {errors?.resumeTitle.message}
                                     </p>
                                 )}
                                 <p className="my-1 text-sm text-gray-500">

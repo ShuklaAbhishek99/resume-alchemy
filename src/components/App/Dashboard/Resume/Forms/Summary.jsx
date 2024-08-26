@@ -22,9 +22,9 @@ function Summary() {
 
     useEffect(() => {
         reset({
-            summary: resumeData.summary || "",
+            summary: resumeData?.summary || "",
         });
-    }, [reset, resumeData.summary]);
+    }, [reset, resumeData?.summary]);
 
     async function generateText(prompt) {
         try {
@@ -49,9 +49,9 @@ function Summary() {
         setLoadSummaries(true);
         try {
             const data = await generateText(
-                `Please provide a list of summaries for the job title ${resumeData.jobTitle} categorized by three experience levels: Internship, Entry Level, Associate, Mid-Senior level, Director, and Executive. Each summary should be 3 to 4 lines long and include the following fields: 'summary' and 'experience_level'. Format the response as a JSON array with each item containing these fields.`
+                `Please provide a list of summaries for the job title ${resumeData?.jobTitle} categorized by three experience levels: Internship, Entry Level, Associate, Mid-Senior level, Director, and Executive. Each summary should be 3 to 4 lines long and include the following fields: 'summary' and 'experience_level'. Format the response as a JSON array with each item containing these fields.`
             );
-            const responseString = data.data;
+            const responseString = data?.data || "";
             const arrayString = responseString.slice(7, -4);
             const originalData = JSON.parse(arrayString);
             setSummaries(originalData);
@@ -63,7 +63,7 @@ function Summary() {
     }
 
     const saveSummary = async (data) => {
-        if (isSignedIn && isLoaded && data.summary.length !== 0) {
+        if (isSignedIn && isLoaded && data?.summary?.length !== 0) {
             setLoading(true);
             try {
                 const updatedResumeData = await resumeService.updateResume(
@@ -137,7 +137,7 @@ function Summary() {
                         <Button
                             type="submit"
                             disabled={
-                                loading || resumeData.summary.length === 0
+                                loading || resumeData?.summary?.length === 0
                             }
                         >
                             {loading ? (
@@ -165,20 +165,20 @@ function Summary() {
                 </div>
             )}
 
-            {summaries.length !== 0 && (
+            {summaries?.length !== 0 && (
                 <div className="my-5">
                     <h2 className="font-bold text-lg mx-3">Suggestions</h2>
                     {summaries?.map((item, index) => (
                         <div
                             key={index}
-                            onClick={() => handleAISummaryClick(item.summary)}
+                            onClick={() => handleAISummaryClick(item?.summary)}
                             className="p-5 shadow-lg my-4 rounded-lg cursor-pointer opacity-0 obo-fade-in"
                             style={{ "--i": index + 1 }}
                         >
                             <h2 className="font-bold my-1 text-primary">
-                                {item.experience_level}
+                                {item?.experience_level}
                             </h2>
-                            <p>{item.summary}</p>
+                            <p>{item?.summary}</p>
                         </div>
                     ))}
                 </div>

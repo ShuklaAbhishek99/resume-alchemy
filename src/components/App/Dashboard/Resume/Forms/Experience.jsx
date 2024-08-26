@@ -31,7 +31,7 @@ function Experience() {
         const { name, value } = e.target;
 
         const updatedExpList = experienceList.map((item) =>
-            item.id === id ? { ...item, [name]: value } : item
+            item?.id === id ? { ...item, [name]: value } : item
         );
 
         setExperienceList(updatedExpList);
@@ -48,7 +48,7 @@ function Experience() {
         const { value } = e.target;
 
         const updatedExpList = experienceList.map((item) =>
-            item.id === id ? { ...item, [name]: value } : item
+            item?.id === id ? { ...item, [name]: value } : item
         );
 
         setExperienceList(updatedExpList);
@@ -87,7 +87,7 @@ function Experience() {
     };
 
     const handleRemoveExperience = (id) => {
-        const updatedExpList = experienceList.filter((exp) => exp.id !== id);
+        const updatedExpList = experienceList.filter((exp) => exp?.id !== id);
         setExperienceList(updatedExpList);
 
         dispatch(
@@ -151,7 +151,7 @@ function Experience() {
             const data = await generateText(
                 `Please provide a list of 4-5 bullet points for the position title ${postionTitle} which explain about the role that I have worked in ex- my contribution in the company, project, etc. Format the response as an array of strings. Remember to include only bullet points which is a string nothing else as i have to process the string. Dont't mention things like here are your points, this is your points, etc.`
             );
-            const responseString = data.data;
+            const responseString = data?.data || "";
 
             const e = {
                 target: { value: responseString },
@@ -174,7 +174,7 @@ function Experience() {
                 <h2 className="font-bold text-lg">Professional Experience</h2>
                 <p>Add Your previous Job experience</p>
                 <div>
-                    {experienceList.map((item) => (
+                    {experienceList?.map((item) => (
                         <div key={item?.id}>
                             <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
                                 <div>
@@ -186,7 +186,7 @@ function Experience() {
                                         name="title"
                                         required
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.title}
                                     />
@@ -200,7 +200,7 @@ function Experience() {
                                         name="companyName"
                                         required
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.companyName}
                                     />
@@ -210,7 +210,7 @@ function Experience() {
                                     <Input
                                         name="city"
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.city}
                                     />
@@ -220,7 +220,7 @@ function Experience() {
                                     <Input
                                         name="state"
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.state}
                                     />
@@ -235,7 +235,7 @@ function Experience() {
                                         name="startDate"
                                         required
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.startDate}
                                     />
@@ -246,7 +246,7 @@ function Experience() {
                                         type="date"
                                         name="endDate"
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.endDate}
                                     />
@@ -259,7 +259,7 @@ function Experience() {
                                     size="sm"
                                     type="button"
                                     onClick={() =>
-                                        fetchAIResponse(item.title, item.id)
+                                        fetchAIResponse(item?.title, item?.id)
                                     }
                                     disabled={loadSummaries}
                                     className="flex gap-2 border-primary text-primary"
@@ -281,7 +281,7 @@ function Experience() {
                                         handleRichTextEditor(
                                             event,
                                             "workSummary",
-                                            item.id
+                                            item?.id
                                         )
                                     }
                                 />
@@ -313,7 +313,7 @@ function Experience() {
                     </div>
                     <Button
                         type="submit"
-                        disabled={loading || experienceList.length === 0}
+                        disabled={loading || experienceList?.length === 0}
                     >
                         {loading ? (
                             <LoaderCircle className="animate-spin" />

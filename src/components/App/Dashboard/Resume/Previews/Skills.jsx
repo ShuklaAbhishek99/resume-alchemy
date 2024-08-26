@@ -6,8 +6,8 @@ function SkillsPreview() {
     const [skillsList, setSkillsList] = useState([]);
 
     useEffect(() => {
-        if (resumeData.skills) {
-            const skillData = JSON.parse(resumeData.skills);
+        if (resumeData?.skills) {
+            const skillData = JSON.parse(resumeData?.skills);
             setSkillsList(skillData || []);
         }
     }, [resumeData?.skills]);

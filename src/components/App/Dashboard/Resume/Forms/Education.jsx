@@ -28,8 +28,8 @@ function Education() {
     const handleInputChange = debounce((e, id) => {
         const { name, value } = e.target;
 
-        const updatedEduList = educationList.map((item) =>
-            item.id === id ? { ...item, [name]: value } : item
+        const updatedEduList = educationList?.map((item) =>
+            item?.id === id ? { ...item, [name]: value } : item
         );
 
         setEducationList(updatedEduList);
@@ -67,7 +67,7 @@ function Education() {
     };
 
     const handleRemoveEducation = (id) => {
-        const updatedEduList = educationList.filter((edu) => edu.id !== id);
+        const updatedEduList = educationList.filter((edu) => edu?.id !== id);
 
         setEducationList(updatedEduList);
 
@@ -117,8 +117,8 @@ function Education() {
                 <p>Add Your educational details</p>
 
                 <div>
-                    {educationList.map((item) => (
-                        <div key={item.id}>
+                    {educationList?.map((item) => (
+                        <div key={item?.id}>
                             <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
                                 <div className="col-span-2">
                                     <label>
@@ -129,7 +129,7 @@ function Education() {
                                         name="universityName"
                                         required
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.universityName}
                                     />
@@ -143,7 +143,7 @@ function Education() {
                                         name="degree"
                                         required
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.degree}
                                     />
@@ -153,7 +153,7 @@ function Education() {
                                     <Input
                                         name="major"
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.major}
                                     />
@@ -168,7 +168,7 @@ function Education() {
                                         name="startDate"
                                         required
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.startDate}
                                     />
@@ -179,7 +179,7 @@ function Education() {
                                         type="date"
                                         name="endDate"
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.endDate}
                                     />
@@ -189,7 +189,7 @@ function Education() {
                                     <Textarea
                                         name="description"
                                         onChange={(e) =>
-                                            handleInputChange(e, item.id)
+                                            handleInputChange(e, item?.id)
                                         }
                                         defaultValue={item?.description}
                                     />
@@ -200,7 +200,7 @@ function Education() {
                                     variant="outline"
                                     type="button"
                                     onClick={() =>
-                                        handleRemoveEducation(item.id)
+                                        handleRemoveEducation(item?.id)
                                     }
                                     className="text-primary"
                                 >
@@ -223,7 +223,7 @@ function Education() {
                     </div>
                     <Button
                         type="submit"
-                        disabled={loading || educationList.length === 0}
+                        disabled={loading || educationList?.length === 0}
                     >
                         {loading ? (
                             <LoaderCircle className="animate-spin" />

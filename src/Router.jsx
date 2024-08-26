@@ -6,6 +6,8 @@ import Dashboard from "./components/App/Dashboard";
 import SignUpPage from "./components/App/Auth/SignUp";
 import ResumeEditor from "./components/App/Dashboard/Resume/ResumeEditor";
 import ResumeView from "./components/App/ResumeViewer";
+import Error from "./components/App/Error";
+import NotFoundPage from "./components/App/Error/PageNotFound";
 
 export const router = createBrowserRouter([
     {
@@ -14,35 +16,47 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard",
                 element: <Dashboard />,
+                errorElement: <Error />,
             },
-            {
-                path: "/:username",
-                element: "Profile page",
-            },
-            {
-                path: "/explore",
-                element: "Explore",
-            },
+            // {
+            //     path: "/:username",
+            //     element: "Profile page",
+            //     errorElement: <Error />,
+            // },
+            // {
+            //     path: "/explore",
+            //     element: "Explore",
+            //     errorElement: <Error />,
+            // },
             {
                 path: "/dashboard/resume/:resumeId/edit",
                 element: <ResumeEditor />,
+                errorElement: <Error />,
             },
         ],
     },
     {
         path: "/",
         element: <Home />,
+        errorElement: <Error />,
     },
     {
         path: "/auth/sign-in",
         element: <SignInPage />,
+        errorElement: <Error />,
     },
     {
         path: "/auth/sign-up",
         element: <SignUpPage />,
+        errorElement: <Error />,
     },
     {
         path: "/resume/:resumeId",
         element: <ResumeView />,
+        errorElement: <Error />,
+    },
+    {
+        path: "*",
+        element: <NotFoundPage />,
     },
 ]);

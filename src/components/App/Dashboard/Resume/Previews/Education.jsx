@@ -6,8 +6,8 @@ function EducationalPreview() {
     const [educationList, setEducationList] = useState([]);
 
     useEffect(() => {
-        if (resumeData.education) {
-            const eduData = JSON.parse(resumeData.education);
+        if (resumeData?.education) {
+            const eduData = JSON.parse(resumeData?.education);
             setEducationList(eduData || []);
         }
     }, [resumeData?.education]);
@@ -45,7 +45,7 @@ function EducationalPreview() {
                             color: resumeData?.themeColor,
                         }}
                     >
-                        {education.universityName}
+                        {education?.universityName}
                     </h2>
                     <h2 className="text-xs flex justify-between">
                         {`${education?.degree}${

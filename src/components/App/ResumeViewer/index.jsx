@@ -13,7 +13,7 @@ import Confetti from "react-confetti";
 import { useUser } from "@clerk/clerk-react";
 
 function ResumeView() {
-    const { user, isLoaded, isSignedIn } = useUser();
+    const { user } = useUser();
     const { resumeId } = useParams();
     const resumeData = useSelector((state) => state.resume);
     const dispatch = useDispatch();
@@ -60,7 +60,7 @@ function ResumeView() {
                 <Header />
 
                 <div className="my-10 mx-10 md:mx-20 lg:mx-36">
-                    {user?.id === resumeData.userId && (
+                    {user?.id === resumeData?.userId && (
                         <>
                             <h2 className="text-center text-2xl font-medium">
                                 <span className="text-primary">
@@ -90,7 +90,7 @@ function ResumeView() {
                                 }}
                             >
                                 <Button className="flex gap-1">
-                                    <Share2 size={'20px'} className="mx-1" />
+                                    <Share2 size={"20px"} className="mx-1" />
                                     <span className="">Share</span>
                                 </Button>
                             </RWebShare>
@@ -105,7 +105,7 @@ function ResumeView() {
                 </div>
             </div>
 
-            {showConfetti && user?.id === resumeData.userId && <Confetti />}
+            {showConfetti && user?.id === resumeData?.userId && <Confetti />}
         </div>
     );
 }

@@ -33,16 +33,14 @@ function ResumeCard({ resumeId, resumeTitle, themeColor }) {
     const dispatch = useDispatch();
 
     const handleDelete = async (id) => {
-        console.log("Deleted");
-
         if (isLoaded && isSignedIn) {
             setLoading(true);
             try {
                 const deletedResume = await resumeService.deleteResume(id);
 
                 if (deletedResume) {
-                    const updatedResumeList = resumeList.filter(
-                        (resume) => resume.$id !== id
+                    const updatedResumeList = resumeList?.filter(
+                        (resume) => resume?.$id !== id
                     );
 
                     dispatch(addResumeList(updatedResumeList));

@@ -26,7 +26,7 @@ function RichTextEditor({ onRichTextEditorChange, defaultValue }) {
                 <Editor
                     value={value}
                     onChange={(e) => {
-                        setValue(e.target.value);
+                        setValue(e.target?.value);
                         onRichTextEditorChange(e);
                     }}
                 >

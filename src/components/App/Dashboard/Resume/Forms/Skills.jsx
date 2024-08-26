@@ -27,8 +27,8 @@ function Skills() {
     }, [resumeData?.skills]);
 
     const handleInputChange = debounce((id, name, value) => {
-        const updatedSkillsList = skillsList.map((item) =>
-            item.id === id ? { ...item, [name]: value } : item
+        const updatedSkillsList = skillsList?.map((item) =>
+            item?.id === id ? { ...item, [name]: value } : item
         );
 
         setSkillsList(updatedSkillsList);
@@ -62,7 +62,7 @@ function Skills() {
     };
 
     const handleRemoveSkills = (id) => {
-        const updatedSkillsList = skillsList.filter((skill) => skill.id !== id);
+        const updatedSkillsList = skillsList.filter((skill) => skill?.id !== id);
 
         setSkillsList(updatedSkillsList);
 
@@ -112,7 +112,7 @@ function Skills() {
                 <p>Add Your top professional key skills</p>
 
                 <div>
-                    {skillsList.map((item, index) => (
+                    {skillsList?.map((item, index) => (
                         <div
                             key={index}
                             className="flex justify-between mb-2 border rounded-lg p-3"
@@ -121,10 +121,10 @@ function Skills() {
                                 <label className="text-xs">Name</label>
                                 <Input
                                     className="w-full"
-                                    defaultValue={item.name}
+                                    defaultValue={item?.name}
                                     onChange={(e) =>
                                         handleInputChange(
-                                            item.id,
+                                            item?.id,
                                             "name",
                                             e.target.value
                                         )
@@ -134,15 +134,15 @@ function Skills() {
                             <Rating
                                 name="rating"
                                 style={{ maxWidth: 120 }}
-                                value={item.rating}
+                                value={item?.rating}
                                 onChange={(value) =>
-                                    handleInputChange(item.id, "rating", value)
+                                    handleInputChange(item?.id, "rating", value)
                                 }
                             />
                             <Button
                                 variant="outline"
                                 type="button"
-                                onClick={() => handleRemoveSkills(item.id)}
+                                onClick={() => handleRemoveSkills(item?.id)}
                                 className="text-primary"
                             >
                                 <Trash2 />
@@ -163,7 +163,7 @@ function Skills() {
                     </div>
                     <Button
                         type="submit"
-                        disabled={loading || skillsList.length === 0}
+                        disabled={loading || skillsList?.length === 0}
                     >
                         {loading ? (
                             <LoaderCircle className="animate-spin" />

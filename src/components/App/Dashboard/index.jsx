@@ -19,9 +19,9 @@ function Dashboard() {
 
         if (isSignedIn && isLoaded) {
             resumeService
-                .getResumes([Query.equal("userId", [user.id])])
+                .getResumes([Query.equal("userId", [user?.id])])
                 .then((data) => {
-                    const resumesData = data.documents;
+                    const resumesData = data?.documents;
 
                     dispatch(addResumeList(resumesData));
                 })
@@ -48,16 +48,20 @@ function Dashboard() {
                                 <Skeleton className="h-8 w-[250px]" />
                             </div>
                         </div>
+                    ) : resumeListData?.length !== 0 ? (
+                        <div className="text-4xl font-bold text-gray-500 my-auto mx-4">
+                            Create a new resume now
+                        </div>
                     ) : (
                         resumeListData?.map((resume) => (
                             <div
-                                key={resume.$id}
+                                key={resume?.$id}
                                 className="hover:scale-105 hover:shadow-md transition-all"
                             >
                                 <ResumeCard
-                                    resumeId={resume.$id}
-                                    resumeTitle={resume.resumeTitle}
-                                    themeColor={resume.themeColor}
+                                    resumeId={resume?.$id}
+                                    resumeTitle={resume?.resumeTitle}
+                                    themeColor={resume?.themeColor}
                                 />
                             </div>
                         ))

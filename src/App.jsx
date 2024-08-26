@@ -10,6 +10,16 @@ function App() {
         return <Navigate to="/auth/sign-in" />;
     }
 
+    console.log(
+        "%cWarning: This is a developer-only area. Proceed with caution!",
+        "color: red; font-size: 24px; font-weight: bold;"
+    );
+
+    console.log(
+        "%cIf someone told you to paste something here, it could compromise your security.",
+        "color: red; font-size: 20px;"
+    );
+
     return (
         <div className="h-screen">
             <Header />

@@ -55,7 +55,7 @@ function ThemeColor() {
     const onColorSelect = async (color) => {
         setSelectedColor(color);
 
-        const currentColor = resumeData.themeColor;
+        const currentColor = resumeData?.themeColor;
 
         try {
             dispatch(
@@ -91,7 +91,7 @@ function ThemeColor() {
             <PopoverContent className="mx-4">
                 <h2 className="mb-2 text-sm font-bold">Select Theme Color</h2>
                 <div className="grid grid-cols-5 gap-3">
-                    {colors.map((item) => (
+                    {colors?.map((item) => (
                         <div
                             key={item}
                             onClick={() => onColorSelect(item)}

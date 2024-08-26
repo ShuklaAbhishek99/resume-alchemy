@@ -7,7 +7,7 @@ function ExperiencePreview() {
 
     useEffect(() => {
         if (resumeData?.experience) {
-            const expData = JSON.parse(resumeData.experience);
+            const expData = JSON.parse(resumeData?.experience);
             setExperienceList(expData || []);
         }
     }, [resumeData?.experience]);
@@ -38,7 +38,7 @@ function ExperiencePreview() {
             />
 
             {experienceList?.map((experience) => (
-                <div key={experience.id} className="my-5">
+                <div key={experience?.id} className="my-5">
                     <h2
                         className="text-sm font-bold"
                         style={{
@@ -60,7 +60,7 @@ function ExperiencePreview() {
                             ${
                                 !experience?.endDate
                                     ? experience?.startDate && "Present"
-                                    : formatDate(experience.endDate)
+                                    : formatDate(experience?.endDate)
                             }`}
                         </span>
                     </h2>
