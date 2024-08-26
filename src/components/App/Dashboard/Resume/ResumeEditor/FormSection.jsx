@@ -39,7 +39,7 @@ function FormSection() {
     };
 
     return (
-        <div className="">
+        <div className="mx-3">
             <div className="flex justify-between items-center">
                 <div className="flex gap-5">
                     <Link title="Dashboard" to={"/dashboard"}>

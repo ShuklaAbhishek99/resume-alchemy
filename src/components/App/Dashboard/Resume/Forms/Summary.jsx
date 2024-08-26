@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AIChatSession } from "../../../../../../api/generateText";
 
 function Summary() {
     const resumeData = useSelector((state) => state.resume);
@@ -28,16 +29,8 @@ function Summary() {
 
     async function generateText(prompt) {
         try {
-            const response = await fetch("/api/generateText", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ prompt }),
-            });
-
-            const data = await response.json();
-
+            const result = await AIChatSession.sendMessage(prompt);
+            const data = JSON.parse(result.response.text());
             return data;
         } catch (error) {
             console.log("Error from generateText :: ", error);
@@ -51,10 +44,8 @@ function Summary() {
             const data = await generateText(
                 `Please provide a list of summaries for the job title ${resumeData?.jobTitle} categorized by three experience levels: Internship, Entry Level, Associate, Mid-Senior level, Director, and Executive. Each summary should be 3 to 4 lines long and include the following fields: 'summary' and 'experience_level'. Format the response as a JSON array with each item containing these fields.`
             );
-            const responseString = data?.data || "";
-            const arrayString = responseString.slice(7, -4);
-            const originalData = JSON.parse(arrayString);
-            setSummaries(originalData);
+
+            setSummaries(data);
         } catch (error) {
             console.log("Error in fetchAIResponse :: ", error);
         } finally {

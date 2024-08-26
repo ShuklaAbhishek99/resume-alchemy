@@ -10,6 +10,7 @@ import { addResume } from "@/features/resumeSlice";
 import { useUser } from "@clerk/clerk-react";
 import { toast } from "sonner";
 import resumeService from "@/appwrite/db/resume";
+import { AIChatSession } from "../../../../../../api/generateText";
 
 function Experience() {
     const resumeData = useSelector((state) => state.resume);
@@ -128,16 +129,8 @@ function Experience() {
 
     async function generateText(prompt) {
         try {
-            const response = await fetch("/api/generateText", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ prompt }),
-            });
-
-            const data = await response.json();
-
+            const result = await AIChatSession.sendMessage(prompt);
+            const data = JSON.parse(result.response.text());
             return data;
         } catch (error) {
             console.log("Error from generateText :: ", error);
@@ -151,7 +144,8 @@ function Experience() {
             const data = await generateText(
                 `Please provide a list of 4-5 bullet points for the position title ${postionTitle} which explain about the role that I have worked in ex- my contribution in the company, project, etc. Format the response as an array of strings. Remember to include only bullet points which is a string nothing else as i have to process the string. Dont't mention things like here are your points, this is your points, etc.`
             );
-            const responseString = data?.data || "";
+
+            const responseString = data.toString() || "";
 
             const e = {
                 target: { value: responseString },
@@ -300,7 +294,7 @@ function Experience() {
                         </div>
                     ))}
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between my-3">
                     <div className="flex gap-2">
                         <Button
                             type="button"
