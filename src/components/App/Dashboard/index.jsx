@@ -48,7 +48,7 @@ function Dashboard() {
                                 <Skeleton className="h-8 w-[250px]" />
                             </div>
                         </div>
-                    ) : resumeListData?.length !== 0 ? (
+                    ) : resumeListData?.length === 0 ? (
                         <div className="text-4xl font-bold text-gray-500 my-auto mx-4">
                             Create a new resume now
                         </div>
