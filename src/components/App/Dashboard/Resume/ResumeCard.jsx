@@ -67,7 +67,7 @@ function ResumeCard({ resumeId, resumeTitle, themeColor }) {
                         borderColor: themeColor,
                     }}
                 >
-                    <div className="flex items-center justify-center h-[180px]">
+                    <div className="flex items-center justify-center h-[180px] min-w-[4.5rem]">
                         <img src="/cv.png" width={80} height={80} />
                     </div>
                 </div>

@@ -7,6 +7,8 @@ import resumeService from "@/appwrite/db/resume";
 import { Query } from "appwrite";
 import { addResumeList } from "@/features/resumeListSlice";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { ArrowUp } from "lucide-react";
 
 function Dashboard() {
     const { user, isSignedIn, isLoaded } = useUser();
@@ -33,24 +35,24 @@ function Dashboard() {
     }, [resumeListData?.length, dispatch, isSignedIn, isLoaded, user?.id]);
 
     return (
-        <div className="p-10 md:px-20 lg:px-32">
+        <div id="top" className="p-10 md:px-20 lg:px-32">
             <h2 className="font-bold text-2xl my-2">My Resume</h2>
             <p className="my-3">
                 Start Creating AI resume for your next job role
             </p>
             <div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6 gap-4 mt-6">
+                <div className="grid min-[499px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6 gap-4 mt-6">
                     <AddResume />
                     {loading ? (
                         <div className="flex flex-col space-y-3">
-                            <Skeleton className="h-[260px] w-[260px] rounded-xl" />
+                            <Skeleton className="h-[260px] rounded-xl" />
                             <div className="space-y-2">
-                                <Skeleton className="h-8 w-[250px]" />
+                                <Skeleton className="h-8" />
                             </div>
                         </div>
                     ) : resumeListData?.length === 0 ? (
-                        <div className="text-4xl font-bold text-gray-500 my-auto mx-4">
-                            Create a new resume now
+                        <div className="text-4xl font-bold text-gray-500 text-center my-auto mx-1">
+                            Create a New Resume now
                         </div>
                     ) : (
                         resumeListData?.map((resume) => (
@@ -67,6 +69,15 @@ function Dashboard() {
                         ))
                     )}
                 </div>
+                <a
+                    href="#top"
+                    className="fixed bottom-4 right-4"
+                    title="move to top"
+                >
+                    <Button className="p-1 opacity-70">
+                        <ArrowUp />
+                    </Button>
+                </a>
             </div>
         </div>
     );
