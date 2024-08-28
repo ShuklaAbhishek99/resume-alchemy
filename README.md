@@ -4,7 +4,7 @@
 
 -   [Introduction](#introduction)
 -   [Features](#features)
--   [Demo](#demo)
+-   [Project Links](#project-video)
 -   [Project Video](#project-video)
 -   [Tech Stack](#tech-stack)
 -   [Installation](#installation)
