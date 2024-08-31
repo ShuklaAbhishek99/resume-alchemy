@@ -2,7 +2,7 @@ import Header from "../Custom/Header";
 import { Button } from "@/components/ui/button";
 import ResumePreview from "../Dashboard/Resume/ResumeEditor/PreviewSection";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RWebShare } from "react-web-share";
 import { useDispatch, useSelector } from "react-redux";
 import resumeService from "@/appwrite/db/resume";
@@ -19,6 +19,7 @@ function ResumeView() {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [showConfetti, setShowConfetti] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -28,6 +29,8 @@ function ResumeView() {
             .then((data) => {
                 if (data) {
                     dispatch(addResume(data));
+                } else {
+                    navigate("/dashboard");
                 }
             })
             .catch((err) => {

@@ -6,10 +6,6 @@ import { Toaster } from "sonner";
 function App() {
     const { isLoaded, isSignedIn } = useUser();
 
-    if (!isSignedIn && isLoaded) {
-        return <Navigate to="/auth/sign-in" />;
-    }
-
     console.log(
         "%cWarning: This is a developer-only area. Proceed with caution!",
         "color: red; font-size: 24px; font-weight: bold;"
@@ -19,6 +15,10 @@ function App() {
         "%cIf someone told you to paste something here, it could compromise your security.",
         "color: red; font-size: 20px;"
     );
+
+    if (!isSignedIn && isLoaded) {
+        return <Navigate to="/auth/sign-in" />;
+    }
 
     return (
         <div className="h-screen">

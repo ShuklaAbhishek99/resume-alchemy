@@ -39,6 +39,7 @@ class ResumeService {
             );
         } catch (error) {
             console.log("Appwrite Service :: getResume :: error ", error);
+            return false
         }
     }
 
